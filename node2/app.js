@@ -62,13 +62,15 @@ app.post('/registerimpl', (req, res) => {
                 console.log('Insert OK !');
                 res.render('index', { 'centerpage': 'registerok' });
             }
-        }catch(e){
+        } catch (e) {
+            res.render('index', { 'centerpage': 'registerfail' });
             console.log(e);
-        }finally{
+        } finally {
             db_connect.close(conn);
         }
     });
 });
+
 
 //app.js-> 라우터폴더의 html을 보여줌 
 const html = require('./routes/html');

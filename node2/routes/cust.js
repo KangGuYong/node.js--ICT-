@@ -1,31 +1,115 @@
-const express=require('express');
+const express = require('express');
 const app = express();
 const router = express.Router();
 const nunjucks = require('nunjucks');
-const bodyParser = require('body-parser'); 
+const bodyParser = require('body-parser');
 
 
+var db_connect = require('../db/db_connect');
+var db_sql = require('../db/db_sql');
 
 
+//http:127.0.0.1/cust
 router
-    .get("/",(req,res)=>{  
-        res.render('index',{'centerpage':'cust/center'});
+    .get("/", (req, res) => {
+        res.render('index', { 'centerpage': 'cust/center' });
     })
-    .get("/cust1",(req,res)=>{
-        let custData = [
-            {'id':'id:01','pwd':'pwd01','name':'강구용1','acc':'1111'},
-            {'id':'id:02','pwd':'pwd02','name':'강구용2','acc':'2222'},
-            {'id':'id:03','pwd':'pwd03','name':'강구용3','acc':'3333'},
-            {'id':'id:04','pwd':'pwd04','name':'강구용4','acc':'4444'},
-            {'id':'id:05','pwd':'pwd05','name':'강구용5','acc':'5555'},
-        ];  
-        res.render('index',{'centerpage':'cust/cust1','custs':custData});
+    .get("/cust1", (req, res) => {
+        conn = db_connect.getConnection();
+
+        conn.query(db_sql.cust_select, function (e, result, fields) {
+            try {
+                if (e) {
+                    console.log('Select Error');
+                    throw e;
+                } else {
+                    console.log(result);
+                    res.render('index', { 'centerpage': 'cust/cust1', 'custs': result });
+                }
+            } catch (e) {
+                // res.render('index', { 'centerpage': 'cust' });
+                console.log(e);
+            } finally {
+                db_connect.close(conn);
+            }
+        });
     })
-    .get("/cust2",(req,res)=>{  
-        res.render('index',{'centerpage':'cust/cust2'});
+    .get("/cust2", (req, res) => {
+        res.render('index', { 'centerpage': 'cust/cust2' });
     })
-    .get("/cust3",(req,res)=>{  
-        res.render('index',{'centerpage':'cust/cust3'});
+    .get("/cust3", (req, res) => {
+        res.render('index', { 'centerpage': 'cust/cust3' });
     })
+    .get("/detail", (req, res) => {
+        let id = req.query.id;
+        conn = db_connect.getConnection();
+
+        conn.query(db_sql.cust_select_one, id, function (e, result, fields) {
+            try {
+                if (e) {
+                    console.log('Select Error');
+                    throw e;
+                } else {
+                    console.log(result);
+                    res.render('index', { 'centerpage': 'cust/detail', 'cust': result[0] });
+                }
+            } catch (e) {
+                console.log(e);
+            } finally {
+                db_connect.close(conn);
+            }
+        });
+    })
+    .post('/updateimpl', (req, res) => {
+        conn = db_connect.getConnection();
+
+        let id = req.body.id;
+        let pwd = req.body.pwd;
+        let name = req.body.name;
+        let acc = req.body.acc;
+
+        let values = [pwd, name, acc, id];
+
+        conn.query(db_sql.cust_update, values, (e, result, fields) => {
+            try {
+                if (e) {
+                    console.log('Update Error');
+                    throw e;
+                } else {
+                    console.log('Update OK!');
+                    res.redirect('detail?id=' + id);
+                }
+            } catch (e) {
+                console.log(e);
+            } finally {
+                db_connect.close(conn);
+            }
+        });
+    })
+    .get('/deleteimpl', (req, res) => {
+        conn = db_connect.getConnection();
+
+        let id = req.query.id;
+        console.log(id);
+        let values = [id];
+
+        conn.query(db_sql.cust_delete, values, (e, result, fields) => {
+            try {
+                if (e) {
+                    console.log('Delete Error');
+                } else {
+                    console.log('Delete OK !');
+                    res.redirect('/cust/cust1');
+                }
+            } catch {
+                console.log(e);
+            } finally {
+                db_connect.close(conn);
+            }
+
+        });
+    });
+
+
 
 module.exports = router;

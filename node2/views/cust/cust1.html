@@ -28,7 +28,7 @@
                     <tbody>
                         {% for c in custs %}
                         <tr>
-                            <td>{{c.id}}</td>
+                            <td><a href="/cust/detail?id={{c.id}}">{{c.id}}</a></td>
                             <td>{{c.name}}</td>
                             <td>{{c.acc}}</td>
                         </tr>
