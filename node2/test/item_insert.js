@@ -1,18 +1,21 @@
 var db_connect = require('../db/db_connect');
 var db_sql = require('../db/db_sql');
 
+
 conn = db_connect.getConnection();
 
-let id = 'id04';
+let name = 'shirts';
+let price = 30000;
+let imganme = 's.jpg';
 
-let values = [id];
+let values = [name,price,imganme];
 
-conn.query(db_sql.cust_delete, values, (e, result, fields) => {
+conn.query(db_sql.item_insert, values, (e, result, fields) => {
     if(e){
-        console.log('Delete Error');
+        console.log('Insert Error');
         console.log(e);
     }else{
-        console.log('Delete OK !');
+        console.log('Insert OK !');
     }
     db_connect.close(conn);
 });
