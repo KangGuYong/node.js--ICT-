@@ -5,6 +5,10 @@ const bodyParser = require('body-parser');
 const app = express();
 const port = process.env.SERVER_PORT || 3000;
 
+//db연결 코드
+var db_connect = require('./db/db_connect');
+var db_sql = require('./db/db_sql');
+
 nunjucks.configure('views', {
     express: app,
 });
@@ -44,8 +48,26 @@ app.post('/registerimpl', (req, res) => {
     let pwd = req.body.pwd;
     let name = req.body.name;
     let acc = req.body.acc;
-    console.log(id + ' ' + pwd + ' ' + name + ' ' + acc+ ' ');
-    res.render('index');
+    conn = db_connect.getConnection();
+    console.log(id + ' ' + pwd + ' ' + name + ' ' + acc + ' ');
+
+    let values = [id, pwd, name, acc];
+
+    conn.query(db_sql.cust_insert, values, (e, result, fields) => {
+        try {
+            if (e) {
+                console.log('Insert Error');
+                throw e;
+            } else {
+                console.log('Insert OK !');
+                res.render('index', { 'centerpage': 'registerok' });
+            }
+        }catch(e){
+            console.log(e);
+        }finally{
+            db_connect.close(conn);
+        }
+    });
 });
 
 //app.js-> 라우터폴더의 html을 보여줌 
