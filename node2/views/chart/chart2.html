@@ -8,43 +8,53 @@
 <script>
     function displayChart() {
         Highcharts.chart('container', {
-            chart: {
-                type: 'pie',
-                options3d: {
-                    enabled: true,
-                    alpha: 45
-                }
-            },
-            title: {
-                text: 'Beijing 2022 gold medals by country',
-                align: 'left'
-            },
-            subtitle: {
-                text: '3D donut in Highcharts',
-                align: 'left'
-            },
-            plotOptions: {
-                pie: {
-                    innerSize: 100,
-                    depth: 45
-                }
-            },
-            series: [{
-                name: 'Medals',
-                data: [
-                    ['Norway', 16],
-                    ['Germany', 12],
-                    ['USA', 8],
-                    ['Sweden', 8],
-                    ['Netherlands', 8],
-                    ['ROC', 6],
-                    ['Austria', 7],
-                    ['Canada', 4],
-                    ['Japan', 3]
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Corn vs wheat estimated production for 2023',
+        align: 'left'
+    },
+    subtitle: {
+        text:
+            'Source: <a target="_blank" ' +
+            'href="https://www.indexmundi.com/agriculture/?commodity=corn">indexmundi</a>',
+        align: 'left'
+    },
+    xAxis: {
+        categories: ['USA', 'China', 'Brazil', 'EU', 'Argentina', 'India'],
+        crosshair: true,
+        accessibility: {
+            description: 'Countries'
+        }
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: '1000 metric tons (MT)'
+        }
+    },
+    tooltip: {
+        valueSuffix: ' (1000 MT)'
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: [
+        {
+            name: 'Corn',
+            data: [387749, 280000, 129000, 64300, 54000, 34300]
+        },
+        {
+            name: 'Wheat',
+            data: [45321, 140000, 10000, 140500, 19500, 113500]
+        }
+    ]
+});
 
-                ]
-            }]
-        });
 
     };
     $(document).ready(function () {
