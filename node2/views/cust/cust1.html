@@ -1,0 +1,41 @@
+<div class="container" style="margin-top:30px">
+    <div class="row">
+        <div class="col-sm-12">
+            <h2>cust Center</h2>
+            <div class="col-sm-3">
+                <ul class="nav nav-pills flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/cust/cust1">cust1</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/cust/cust2">cust2</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/cust/cust3">cust3</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm-9">
+                <he>cust Center</he>
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Account</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for c in custs %}
+                        <tr>
+                            <td>{{c.id}}</td>
+                            <td>{{c.name}}</td>
+                            <td>{{c.acc}}</td>
+                        </tr>
+                        {% endfor%}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
