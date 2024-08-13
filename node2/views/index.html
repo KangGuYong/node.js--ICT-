@@ -41,7 +41,7 @@
 <!-- login ok -->
 <ul class="nav justify-content-end">
   <li class="nav-item">
-    <a class="nav-link" href="#">{{loginid}}</a>
+    <a class="nav-link" href="/cust/detail?id={{loginid}}">{{loginid}}</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="/logout">Logout</a>
@@ -81,12 +81,18 @@
         <li class="nav-item">
           <a class="nav-link" href="/chart">Chart</a>
         </li>
+        
         <li class="nav-item">
-          <a class="nav-link" href="/cust">Cust</a>
+          <a class="nav-link" href="/useritem">Item</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/item">Item</a>
-        </li>
+        {% if loginid == 'admin' %}
+          <li class="nav-item">
+            <a class="nav-link" href="/cust">Cust Mgt</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/item">Item Mgt</a>
+          </li>
+        {% endif %}
       </ul>
     </div>
   </nav>

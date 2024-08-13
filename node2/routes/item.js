@@ -7,11 +7,12 @@ const bodyParser = require('body-parser');
 var db_connect = require('../db/db_connect');
 var db_sql = require('../db/db_sql');
 
-
+var goto = require('../util/goto');
 
 router
-    .get("/",(req,res)=>{  
-        res.render('index',{'centerpage':'item/center'});
+    .get("/",(req,res)=>{
+        goto.go(req,res,{'centerpage':'item/center'});    
+        // res.render('index',{'centerpage':'item/center'});
     })
     .get("/item1",(req,res)=>{
         conn = db_connect.getConnection();
@@ -22,7 +23,8 @@ router
                     throw e;
                 } else {
                     console.log(result);
-                    res.render('index', { 'centerpage': 'item/item1', 'items': result });
+                    goto.go(req,res,{ 'centerpage': 'item/item1', 'items': result });
+                    // res.render('index', { 'centerpage': 'item/item1', 'items': result });
                 }
             } catch (e) {
                 console.log(e);
@@ -31,11 +33,14 @@ router
             }
         });
     })
-    .get("/item2",(req,res)=>{  
-        res.render('index',{'centerpage':'item/item2'});
+    .get("/item2",(req,res)=>{
+        goto.go(req,res,{'centerpage':'item/item2'});  
+        // res.render('index',{'centerpage':'item/item2'});
     })
     .get("/item3",(req,res)=>{  
-        res.render('index',{'centerpage':'item/item3'});
+        goto.go(req,res,{'centerpage':'item/item3'});  
+        // res.render('index',{'centerpage':'item/item3'});
     })
+    
 
 module.exports = router;

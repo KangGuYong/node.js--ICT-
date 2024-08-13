@@ -8,11 +8,13 @@ const bodyParser = require('body-parser');
 var db_connect = require('../db/db_connect');
 var db_sql = require('../db/db_sql');
 
+var goto = require('../util/goto');
 
 //http:127.0.0.1/cust
 router
     .get("/", (req, res) => {
-        res.render('index', { 'centerpage': 'cust/center' });
+        goto.go(req,res,{ 'centerpage': 'cust/center' }); 
+        // res.render('index', { 'centerpage': 'cust/center' });
     })
     .get("/cust1", (req, res) => {
         conn = db_connect.getConnection();
@@ -24,7 +26,8 @@ router
                     throw e;
                 } else {
                     console.log(result);
-                    res.render('index', { 'centerpage': 'cust/cust1', 'custs': result });
+                    goto.go(req,res,{ 'centerpage': 'cust/cust1', 'custs': result }); 
+                    // res.render('index', { 'centerpage': 'cust/cust1', 'custs': result });
                 }
             } catch (e) {
                 // res.render('index', { 'centerpage': 'cust' });
@@ -35,10 +38,12 @@ router
         });
     })
     .get("/cust2", (req, res) => {
-        res.render('index', { 'centerpage': 'cust/cust2' });
+        goto.go(req,res,{ 'centerpage': 'cust/cust2' });
+        // res.render('index', { 'centerpage': 'cust/cust2' });
     })
     .get("/cust3", (req, res) => {
-        res.render('index', { 'centerpage': 'cust/cust3' });
+        goto.go(req,res,{ 'centerpage': 'cust/cust3' });
+        // res.render('index', { 'centerpage': 'cust/cust3' });
     })
     .get("/detail", (req, res) => {
         let id = req.query.id;
@@ -51,7 +56,8 @@ router
                     throw e;
                 } else {
                     console.log(result);
-                    res.render('index', { 'centerpage': 'cust/detail', 'cust': result[0] });
+                    goto.go(req,res,{ 'centerpage': 'cust/detail', 'cust': result[0] });
+                    // res.render('index', { 'centerpage': 'cust/detail', 'cust': result[0] });
                 }
             } catch (e) {
                 console.log(e);

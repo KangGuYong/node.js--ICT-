@@ -9,19 +9,21 @@
                 </div>
                 <div class="form-group">
                     <label for="pwd">Password:</label>
-                    <input type="password" value="{{cust.pwd}}"class="form-control" name="pwd" id="pwd">
+                    <input type="password" value="{{cust.pwd}}" class="form-control" name="pwd" id="pwd">
                 </div>
                 <div class="form-group">
                     <label for="name">Name:</label>
-                    <input type="text" value="{{cust.name}}"class="form-control" name="name"  id="name">
+                    <input type="text" value="{{cust.name}}" class="form-control" name="name" id="name">
                 </div>
                 <div class="form-group">
                     <label for="acc">Account:</label>
-                    <input type="text" value="{{cust.acc}}"class="form-control" name="acc"  id="acc">
+                    <input type="text" value="{{cust.acc}}" class="form-control" name="acc" id="acc">
                 </div>
                 <button type="submit" class="btn btn-primary">UPDATE</button>
             </form>
-            <a href="/cust/deleteimpl?id={{cust.id}}" class="btn btn-info" role="button">Delete</a>
+            {% if loginid == null %}
+                <a href="/cust/deleteimpl?id={{cust.id}}" class="btn btn-info" role="button">Delete</a>
+            {% endif %}
         </div>
     </div>
 </div>

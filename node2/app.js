@@ -141,7 +141,8 @@ app.get('/', (req, res) => {
 });
 //로그인
 app.get('/login', (req, res) => {
-    res.render('index', { 'centerpage': 'login' });
+    goto.go(req,res,{ 'centerpage': 'login' });
+    // res.render('index', { 'centerpage': 'login' });
 });
 //로그아웃
 app.get('/logout', (req, res) => {
@@ -160,12 +161,6 @@ app.get('/about', (req, res) => {
 });
 
 // POST 요청으로 변경 (loginimpl)
-app.post('/loginimpl', (req, res) => {
-    let id = req.body.id;
-    let pwd = req.body.pwd;
-    console.log(id + ' ' + pwd);
-    res.render('index');
-});
 
 // POST 요청으로 변경 (registerimpl)
 app.post('/registerimpl', (req, res) => {
@@ -185,10 +180,12 @@ app.post('/registerimpl', (req, res) => {
                 throw e;
             } else {
                 console.log('Insert OK !');
-                res.render('index', { 'centerpage': 'registerok' });
+                goto.go(req,res,{ 'centerpage': 'registerok' });
+                // res.render('index', { 'centerpage': 'registerok' });
             }
         } catch (e) {
-            res.render('index', { 'centerpage': 'registerfail' });
+            goto.go(req,res,{ 'centerpage': 'registerfail' });
+            // res.render('index', { 'centerpage': 'registerfail' });
             console.log(e);
         } finally {
             db_connect.close(conn);
@@ -213,6 +210,8 @@ app.use('/cust', cust);
 const item = require('./routes/item');
 app.use('/item', item);
 
+const useritem = require('./routes/useritem');
+app.use('/useritem', useritem);
 //서버시작
 app.listen(port, () => {
     console.log(`server start port:${port}`);
