@@ -106,7 +106,6 @@ router
             } finally {
                 db_connect.close(conn);
             }
-
         });
     });
 

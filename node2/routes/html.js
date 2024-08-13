@@ -3,12 +3,14 @@ const app = express();
 const router = express.Router();
 const nunjucks = require('nunjucks');
 const bodyParser = require('body-parser'); 
-
+var goto = require('../util/goto');
 router
-    .get("/",(req,res)=>{  
-        res.render('index',{'centerpage':'html/center'});
+    .get("/",(req,res)=>{
+        goto.go(req,res,{'centerpage':'html/center'});  
+        // res.render('index',{'centerpage':'html/center'});
     })
-    .get("/html1",(req,res)=>{  
+    .get("/html1",(req,res)=>{
+          
         res.render('index',{'centerpage':'html/html1'});
     })
     .get("/html2",(req,res)=>{  

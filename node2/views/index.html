@@ -37,18 +37,33 @@
     <h1>My Web Application</h1>
     <p>Node.js & Block Chain</p>
   </div>
-
-  <ul class="nav justify-content-end">
-    <li class="nav-item">
-      <a class="nav-link" href="/login">Login</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="/register">Register</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="/about">About us</a>
-    </li>
-  </ul>
+{% if loginid %}
+<!-- login ok -->
+<ul class="nav justify-content-end">
+  <li class="nav-item">
+    <a class="nav-link" href="#">{{loginid}}</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/logout">Logout</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/about">About us</a>
+  </li>
+</ul>
+{% else %}
+<!-- login fail -->
+<ul class="nav justify-content-end">
+  <li class="nav-item">
+    <a class="nav-link" href="/login">Login</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/register">Register</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/about">About us</a>
+  </li>
+</ul>
+{% endif %}
 
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <a class="navbar-brand" href="/">Home</a>
