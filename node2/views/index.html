@@ -37,33 +37,33 @@
     <h1>My Web Application</h1>
     <p>Node.js & Block Chain</p>
   </div>
-{% if loginid %}
-<!-- login ok -->
-<ul class="nav justify-content-end">
-  <li class="nav-item">
-    <a class="nav-link" href="/cust/detail?id={{loginid}}">{{loginid}}</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="/logout">Logout</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="/about">About us</a>
-  </li>
-</ul>
-{% else %}
-<!-- login fail -->
-<ul class="nav justify-content-end">
-  <li class="nav-item">
-    <a class="nav-link" href="/login">Login</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="/register">Register</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="/about">About us</a>
-  </li>
-</ul>
-{% endif %}
+  {% if loginid %}
+  <!-- login ok -->
+  <ul class="nav justify-content-end">
+    <li class="nav-item">
+      <a class="nav-link" href="/cust/detail?id={{loginid}}">{{loginid}}</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/logout">Logout</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/about">About us</a>
+    </li>
+  </ul>
+  {% else %}
+  <!-- login fail -->
+  <ul class="nav justify-content-end">
+    <li class="nav-item">
+      <a class="nav-link" href="/login">Login</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/register">Register</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/about">About us</a>
+    </li>
+  </ul>
+  {% endif %}
 
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <a class="navbar-brand" href="/">Home</a>
@@ -81,17 +81,27 @@
         <li class="nav-item">
           <a class="nav-link" href="/chart">Chart</a>
         </li>
-        
         <li class="nav-item">
           <a class="nav-link" href="/useritem">Item</a>
         </li>
         {% if loginid == 'admin' %}
-          <li class="nav-item">
-            <a class="nav-link" href="/cust">Cust Mgt</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/item">Item Mgt</a>
-          </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/cust">Cust Mgt</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/item">Item Mgt</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin">Cart Mgt</a>
+        </li>
+        {% endif %}
+        {% if loginid %}
+        <li class="nav-item">
+          <a class="nav-link" href="/useritem/cart">Cart</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/block">block</a>
+        </li>
         {% endif %}
       </ul>
     </div>

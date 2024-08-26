@@ -50,7 +50,7 @@
                         {% for c in items %}
                         <tr>
                             <td><img src="/img/{{ c.imgname }}" id="item_img"></td>
-                            <td>{{c.id}}</td>
+                            <td><a href="/item/detail?id={{c.id}}">{{c.id}}</a></td>
                             <td>{{c.name}}</td>
                             <td>{{c.price}}</td>
                             <td>{{c.regdate}}</td>

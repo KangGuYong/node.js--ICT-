@@ -5,7 +5,6 @@ const bodyParser = require('body-parser');
 const app = express();
 const port = process.env.SERVER_PORT || 3000;
 
-
 //db연결 코드
 var db_connect = require('./db/db_connect');
 var db_sql = require('./db/db_sql');
@@ -212,6 +211,19 @@ app.use('/item', item);
 
 const useritem = require('./routes/useritem');
 app.use('/useritem', useritem);
+
+const admin = require('./routes/admin');
+app.use('/admin', admin);
+
+const block = require('./routes/block');
+app.use('/block', block);
+
+
+
+
+
+
+
 //서버시작
 app.listen(port, () => {
     console.log(`server start port:${port}`);
